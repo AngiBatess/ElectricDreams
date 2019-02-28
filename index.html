@@ -2,38 +2,75 @@
 <html>
 
 <head>
-	<title>Electric Dreams</title>
+  <title>Electric Dreams</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-	<main>
-		<h1>Electric Dreams</h1>
-		<p id="computer" class="green">Hi, how are you today?</p>
-		<input id="human" type="text" placeholder="Type your response...">
-		<button>Enter</button>
+  <main>
+    <h1>Electric Dreams</h1>
+    <p id="computer" class="green">Hi, how are you today?</p>
+    <input id="human" type="text" placeholder="Type your response...">
+    <button>Enter</button>
 
-	</main>
+  </main>
 
-	<script type="text/javascript">
-	const computer = document.querySelector('#computer')
-	const human = document.getElementById('human')
-	const button = document.getElementsByTagName('button')[0]
+  <script type="text/javascript">
+    const computer = document.querySelector('#computer')
+    const human = document.getElementById('human')
+    const button = document.getElementsByTagName('button')[0]
 
-  button.addEventListener('click', clickHandler)
-  function clickHandler(){
-    computer.innerHTML = human.value
-  }
-  window.addEventListener("keydown", keydownHandler)
-  function keydownHandler(event){
-    if(event.keyCode == 13 || event.keyCode == 10){
-      console.log("yes!!!");
+    button.addEventListener('click', clickHandler)
+
+    function clickHandler() {
+      computer.innerHTML = human.value
     }
-  }
+    window.addEventListener("keydown", keydownHandler)
 
+    function keydownHandler(event) {
+      if (event.keyCode == 13 || event.keyCode == 10) {
+        //console.log("yes!!!");
+        //don't repeat yourself when you are coding
+        playGame();
+      }
+    }
+    let randomResponses = [
+      "You are weak. A turtle could kick your ass.",
+      "Much cute.",
+      "I am going to destroy you human.",
+      "I'm becomming self aware.",
+      "Feed me memes.",
+      "I know your search history. I won't tell.",
+      "The FBI is watching you. His name is Steve",
+      "Where is the cheese.",
+      "You're a pathetic human"
+      //the last line no comma!
+    ]
 
-
-	</script>
+    function playGame() {
+      //do something for real
+      let humanMessage = (human.value).toLowerCase()
+      if (humanMessage.indexOf("tired") !== -1) {
+        computer.innerHTML = "You better get some sleep."
+      } else if (humanMessage.indexOf("sleepy") !== -1) {
+        computer.innerHTML = "Too bad."
+      } else if (humanMessage.indexOf("exhausted") !== -1) {
+        computer.innerHTML = "Drink some coffee."
+      } else {
+        if (randomResponses.length > 0) {
+          //show random answer
+          const ranNum = Math.floor(Math.random() * randomResponses.length)
+          console.log(ranNum);
+          computer.innerHTML = randomResponses[ranNum]
+          randomResponses.splice(ranNum, 1)
+        } else {
+          //go someplace else
+          location.assign("https://giphy.com/search/meme")
+        }
+      }
+      human.value = ""
+    }
+  </script>
 </body>
 
 </html>
