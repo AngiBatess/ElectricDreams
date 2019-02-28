@@ -1,0 +1,26 @@
+body {
+  background-image: url(Electric.gif);
+  position: absolute;
+  background-position: center;
+  }
+  button {
+    display: none;
+  }
+  input{
+    font-size: 2em;
+    font-family: monospace;
+  }
+  .red { color: red;}
+  .green {color: rgb(43, 176, 212);}
+  h1{color: rgb(199, 233, 232);}
+  main{
+    width:200%;
+    margin: 5em auto;
+    margin-left: 9em;
+    padding: 1em 1em 2em 1em;
+    border-radius: 50px;
+    border: 3px solid rgb(73, 230, 246);
+    background-color: rgba(65, 124, 147,.3);
+    text-align: center;
+
+  }
