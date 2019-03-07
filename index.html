@@ -121,7 +121,7 @@
 
     function blackEval() {
       if (humanMsg.indexOf("no") !== -1) {
-        computerMsg = "Hmm. Cream or sugar?"
+        computerMsg = "Hmm. Do you like cream or sugar?"
         questionTrack = "sugar"
       } else if (humanMsg.indexOf("yes") !== -1) {
         genericResponse()
@@ -143,7 +143,7 @@
 
     function somethingEval() {
       if (humanMsg.indexOf("yes") !== -1) {
-        computerMsg = "I need your opinion. Dubstep or Country?"
+        computerMsg = "I need your opinion. Dancing Dogs or a Crab Rave?"
         questionTrack = "music"
       } else if (humanMsg.indexOf("no") !== -1) {
         genericResponse()
@@ -151,10 +151,10 @@
     }
 
     function musicEval() {
-      if (humanMsg.indexOf("dubstep") !== -1) {
-        location.assign("https://www.youtube.com/watch?v=7S9S3UbtIVM")
-      } else if (humanMsg.indexOf("country") !== -1) {
-        location.assign("https://www.youtube.com/watch?v=1vrEljMfXYo")
+      if (humanMsg.indexOf("Dancing Dogs") !== -1) {
+        location.assign("https://www.youtube.com/watch?v=EcOE1ScBozI")
+      } else if (humanMsg.indexOf("Crab Rave") !== -1) {
+        location.assign("https://www.youtube.com/watch?v=LDU_Txk06tM")
       }
 
     }
