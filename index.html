@@ -9,7 +9,7 @@
 <body>
   <main>
     <h1>Electric Dreams</h1>
-    <p id="computer" class="green">Hi, how are you today?</p>
+    <p id="computer" class="green">Hi. How tired are you today?</p>
     <input id="human" type="text" placeholder="Type your response...">
     <button>Enter</button>
 
@@ -19,6 +19,11 @@
     const computer = document.querySelector('#computer')
     const human = document.getElementById('human')
     const button = document.getElementsByTagName('button')[0]
+    const main = document.querySelector('main')
+
+    let computerMsg = ""
+    let humanMsg = ""
+    let questionTrack = "start"
 
     button.addEventListener('click', clickHandler)
 
@@ -48,27 +53,148 @@
     ]
 
     function playGame() {
+      //analyze text
       //do something for real
-      let humanMessage = (human.value).toLowerCase()
-      if (humanMessage.indexOf("tired") !== -1) {
-        computer.innerHTML = "You better get some sleep."
-      } else if (humanMessage.indexOf("sleepy") !== -1) {
-        computer.innerHTML = "Too bad."
-      } else if (humanMessage.indexOf("exhausted") !== -1) {
-        computer.innerHTML = "Drink some coffee."
-      } else {
-        if (randomResponses.length > 0) {
-          //show random answer
-          const ranNum = Math.floor(Math.random() * randomResponses.length)
-          console.log(ranNum);
-          computer.innerHTML = randomResponses[ranNum]
-          randomResponses.splice(ranNum, 1)
-        } else {
-          //go someplace else
-          location.assign("https://giphy.com/search/meme")
-        }
+      humanMsg = (human.value).toLowerCase()
+
+      if (questionTrack == "start") {
+        startEval()
+      } else if (questionTrack == "game") {
+        gameEval()
+      } else if (questionTrack == "coffee") {
+        coffeeEval()
+      } else if (questionTrack == "black") {
+        blackEval()
+      } else if (questionTrack == "sugar") {
+        sugarEval()
+      } else if (questionTrack == "color") {
+        colorEval()
+      } else if (questionTrack == "something") {
+        somethingEval()
+      } else if (questionTrack == "music") {
+        musicEval()
       }
+      //add all the functions as a else if
+      else {
+        genericResponse()
+      }
+
+      computer.innerHTML = computerMsg
       human.value = ""
+      console.log(questionTrack);
+    }
+
+    function startEval() {
+      if (humanMsg.indexOf("not") !== -1) {
+        computerMsg = "That's unusual! Want to play a game?"
+        questionTrack = "game"
+      } else if (humanMsg.indexOf("very") !== -1 || humanMsg.indexOf("pretty") !== -1 || humanMsg.indexOf("super") !== -1) {
+        computerMsg = "You sound depressed. Do you like coffee?"
+        questionTrack = "coffee"
+      } else if (humanMsg.indexOf("little") !== -1 || humanMsg.indexOf("kind") !== -1) {
+        computerMsg = "Too bad. Can I ask you something?"
+        questionTrack = "something"
+      } else {
+        genericResponse()
+      }
+
+    }
+    //use || for or to add more words
+    function gameEval() {
+      if (humanMsg.indexOf("yes") !== -1) {
+        computerMsg = "What color am I thinking of?"
+        questionTrack = "color"
+      } else if (humanMsg.indexOf("no") !== -1) {
+        genericResponse()
+      }
+    }
+
+    function coffeeEval() {
+      if (humanMsg.indexOf("yes") !== -1) {
+        computerMsg = "Do you like your coffee black?"
+        questionTrack = "black"
+      } else if (humanMsg.indexOf("no") !== -1) {
+        genericResponse()
+      }
+
+    }
+
+    function blackEval() {
+      if (humanMsg.indexOf("no") !== -1) {
+        computerMsg = "Hmm. Cream or sugar?"
+        questionTrack = "sugar"
+      } else if (humanMsg.indexOf("yes") !== -1) {
+        genericResponse()
+      }
+    }
+
+    function sugarEval() {
+      if (humanMsg.indexOf("cream") !== -1) {
+        computerMsg = "I think you need to sweeten your life."
+      } else if (humanMsg.indexOf("sugar") !== -1) {
+        computerMsg = "You need some milk!!"
+      } else if (humanMsg.indexOf("both") !== -1) {
+        computerMsg = "I respect you human."
+      } else {
+        genericResponse()
+      }
+
+    }
+
+    function somethingEval() {
+      if (humanMsg.indexOf("yes") !== -1) {
+        computerMsg = "I need your opinion. Dubstep or Country?"
+        questionTrack = "music"
+      } else if (humanMsg.indexOf("no") !== -1) {
+        genericResponse()
+      }
+    }
+
+    function musicEval() {
+      if (humanMsg.indexOf("dubstep") !== -1) {
+        location.assign("https://www.youtube.com/watch?v=y7jxmk-ib78")
+      } else if (humanMsg.indexOf("country") !== -1) {
+        location.assign("https://www.youtube.com/watch?v=1vrEljMfXYo")
+      }
+
+    }
+
+    function colorEval() {
+      main.style.backgroundColor = humanMsg
+      if (humanMsg.indexOf("red") !== -1) {
+        main.classList.add("redBG")
+      } else if (humanMsg.indexOf("orange") !== -1) {
+        main.classList.add("orangeBG")
+      } else if (humanMsg.indexOf("yellow") !== -1) {
+        main.classList.add("yellowBG")
+      } else if (humanMsg.indexOf("green") !== -1) {
+        main.classList.add("greenBG")
+      } else if (humanMsg.indexOf("blue") !== -1) {
+        main.classList.add("blueBG")
+      } else if (humanMsg.indexOf("purple") !== -1) {
+        main.classList.add("purpleBG")
+      } else {
+        genericResponse()
+      }
+
+    }
+
+    function genericResponse() {
+      if (randomResponses.length > 0) {
+        //show random answer
+        const ranNum = Math.floor(Math.random() * randomResponses.length)
+        computerMsg = randomResponses[ranNum]
+        console.log(computerMsg);
+        randomResponses.splice(ranNum, 1)
+      } else {
+        computerMsg = "I'm done talking to you."
+        human.className = "displayNone"
+        setTimeout(endGame, 1800)
+      }
+    }
+
+    function endGame() {
+      location.assign("https://giphy.com/search/meme")
     }
   </script>
 </body>
